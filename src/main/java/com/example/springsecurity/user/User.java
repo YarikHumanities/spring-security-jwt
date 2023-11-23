@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 //Because table User is already preserved in Postgres
-@Table(name = "_user")
+@Table(name = "app_users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue

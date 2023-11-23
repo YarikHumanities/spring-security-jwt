@@ -5,6 +5,7 @@ import com.example.springsecurity.user.Role;
 import com.example.springsecurity.user.User;
 import com.example.springsecurity.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -29,8 +31,7 @@ public class AuthenticationService {
 
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse
-                .builder()
+        return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
@@ -46,8 +47,7 @@ public class AuthenticationService {
 
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse
-                .builder()
+        return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
