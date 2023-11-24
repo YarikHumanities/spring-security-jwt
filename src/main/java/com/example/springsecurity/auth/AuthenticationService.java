@@ -35,6 +35,23 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
+
+    public AuthenticationResponse registerWithRole(RegisterWithRoleRequest request) {
+        var user = new User();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.valueOf(request.getRole()));
+
+        repository.save(user);
+
+        var jwtToken = jwtService.generateToken(user);
+
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

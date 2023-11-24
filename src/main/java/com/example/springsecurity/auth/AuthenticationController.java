@@ -18,6 +18,14 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
+    @PostMapping("/regrRole")
+    public ResponseEntity<AuthenticationResponse> registerWithRole(
+            @RequestBody RegisterWithRoleRequest request
+    ){
+        log.info("We are in /regRole");
+        return ResponseEntity.ok(service.registerWithRole(request));
+    }
+
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
@@ -27,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(
+    public ResponseEntity<AuthenticationResponse> auth(
             @RequestBody AuthenticationRequest request
     ){
         return ResponseEntity.ok(service.authenticate(request));
